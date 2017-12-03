@@ -1,20 +1,9 @@
-# MEAN Stack Single Page Application Starter
+# Wholesome Mash
+For that itching need for FaceMash in the 2010 decade, except more wholesome! Now with -100% more CSS! 
 
-This is a repo for a starter appliation for a Single Page MEAN Stack application. Just download and install and you have a good foundation for building application. 
+## Deployment
+1. Download/Clone the repository
+2. Start up the server: `node server.js`
+3. View in browser at http://localhost:8080
 
-## Installation
-1. Download the repository
-2. Install npm modules: `npm install`
-3. Install bower dependencies `bower install`
-4. Start up the server: `node server.js`
-5. View in browser at http://localhost:8080
-
-Use this starter kit to build any MEAN stack application you like.
-
-If you have any questions or requests, email us at [chris@scotch.io](mailto:chris@scotch.io) and we'll keep updating this to make it perfect.
-
-## Future Additions
-- CRUD examples
-- Development and Production Environments
-- Link examples
-- Single Page AngularJS Animations
+Built for [YHack 2017](https://yhack2017.devpost.com/)
