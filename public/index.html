@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<base href="/">
+
+	<title>WholesomeMash</title>
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/style.css"> <!-- custom styles -->
+	<script type="text/javascript">
+	var leftMeme = {};
+	var rightMeme = {};
+	function loadImgs() {
+		var req = new XMLHttpRequest();
+		req.responseType = 'json';
+		req.open("GET", "/memes", true);
+		req.onload = function() {
+			var memePair = req.response;
+			leftMeme = memePair[0];
+			rightMeme = memePair[1];
+			if(leftMeme["url"].endsWith(".gifv")) {
+				document.getElementById("left").innerHTML = "<video preload=\"auto\" autoplay=\"autoplay\" loop=\"loop\"><source src=\"" + leftMeme["url"].substring(0, leftMeme["url"].length - 5) + ".mp4\" type=\"video/mp4\">"
+			}
+			else {
+				document.getElementById("left").innerHTML = "<img src=\"" + leftMeme["url"] + "\">"
+			}
+			if(rightMeme["url"].endsWith(".gifv")) {
+				document.getElementById("right").innerHTML = "<video preload=\"auto\" autoplay=\"autoplay\" loop=\"loop\"><source src=\"" + rightMeme["url"].substring(0, rightMeme["url"].length - 5) + ".mp4\" type=\"video/mp4\">"
+			}
+			else {
+				document.getElementById("right").innerHTML = "<img src=\"" + rightMeme["url"] + "\">"
+			}
+		}
+		req.send();
+	}
+
+	function chsLeft(){
+		var req = new XMLHttpRequest();
+		req.open("POST", "/choice?winner=" + leftMeme._id + "&loser=" + rightMeme._id)
+		req.send();
+		loadImgs();
+	}
+	function chsRight(){
+		var req = new XMLHttpRequest();
+		req.open("POST", "/choice?winner=" + rightMeme._id + "&loser=" + leftMeme._id)
+		req.send();
+		loadImgs();
+	}
+	window.onload = loadImgs;
+	</script>
+</head>
+<body>
+<a href="/scoreboard.html">Scoreboard</a>
+<table>
+<tr>
+	<td width="300px" id="left"></td>
+	<td width="100px">VS</td>
+	<td width="300px" id="right"></td>
+</tr>
+<tr>
+	<td width="300px"><button type="button" id="leftbtn" onclick="chsLeft()">LEFT</button></td>
+	<td width="100px"></td>
+	<td width="300px"><button type="button" id="rightbtn" onclick="chsRight()">RIGHT</button></td>
+</tr>
+</table>
+</body>
+</html>

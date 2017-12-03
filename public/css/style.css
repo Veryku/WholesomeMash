@@ -1,0 +1,15 @@
+body { padding-top:30px; }
+
+img {
+	max-width: 300px;
+	max-height: 300px;
+}
+
+td {
+	text-align: center;
+}
+
+video {
+	max-width: 300px;
+	max-height: 300px;
+}

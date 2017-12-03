@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<base href="/">
+
+	<title>WholesomeMash Scoreboard</title>
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/style.css"> <!-- custom styles -->
+	<script type="text/javascript">
+	function loadScores() {
+		var req = new XMLHttpRequest();
+		req.responseType = 'json';
+		req.open("GET", "/scores", true);
+		req.onload = function() {
+			var scoreArr = req.response;
+			scoreArr.sort(function(a, b) {
+				return b["elo"] - a["elo"];
+			});
+			scoreArr.forEach(function(elem) {
+				document.getElementById("scores").innerHTML += "<tr><td>" + elem["_id"] + "</td><td><a href=\"" + elem["url"] + "\">" + elem["url"] + "</a></td><td>" + Math.round(elem["elo"]) + "</td></tr>";
+			});
+		};
+		req.send();
+	}
+
+	window.onload = loadScores;
+	</script>
+</head>
+<body>
+<a href="/">Back to WholesomeMash</a>
+<table id="scores">
+<tr>
+	<td>ID</td>
+	<td>URL</td>
+	<td>ELO</td>
+</tr>
+</table>
+</body>
+</html>
